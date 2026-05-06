@@ -2,7 +2,7 @@
 
 An interactive browser-based simulator for the **Firefighter Problem** on Halin and Outerplanar graphs, with automated optimal containment strategies.
 
-Built as part of the CS Mini Project at **IIT Jammu** (Group 14, 2025).
+Built as part of the our Mini Project in sem 4 .
 
 ## Live Demo
 
@@ -61,7 +61,6 @@ Gordinowicz, P. (2015). *Planar graph is on fire.* Theoretical Computer Science,
 
 ## Team
 
-Group 14 — Mathematics and Computing, IIT Jammu
 - Jay Mangal Pandey (2023UMA0216)
 - Sachin Kumar Sah (2023UMA0234)
 - Nishchay Chaudhary (2023UMA0226)
