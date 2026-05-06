@@ -6,9 +6,9 @@ Built as part of the our Mini Project in sem 4 .
 
 ## Live Demo
 
-Open `index.html` directly in any browser — no server or dependencies needed.
-or 
-[▶ Open Simulator] : (https://quantum-knight07.github.io/Firefighter-probem/)
+Open `index.html` directly in any browser — no server or dependencies needed.   
+  OR   
+[Open Simulator] : (https://quantum-knight07.github.io/Firefighter-probem/)
 
 ## What is the Firefighter Problem?
 
