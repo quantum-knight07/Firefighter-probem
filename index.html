@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Firefighter Problem Simulator</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <h1>Firefighter Problem <span class="accent">Simulator</span></h1>
+      <p class="subtitle">Interactive visualization of optimal fire containment on Halin &amp; Outerplanar graphs</p>
+      <div class="header-meta">
+        <span>CS Mini Project — IIT Jammu, Group 14</span>
+        <span>Based on Gordinowicz (2015)</span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="controls-bar">
+      <div class="control-group">
+        <label for="gtype">Graph type</label>
+        <select id="gtype"></select>
+      </div>
+      <div class="control-group slider-group">
+        <label for="nslider">Nodes: <span id="nval">10</span></label>
+        <input type="range" id="nslider" min="7" max="22" value="10" step="1" />
+      </div>
+      <div class="btn-group">
+        <button id="stepBtn" disabled>Step</button>
+        <button id="autoBtn" disabled>Auto Run</button>
+        <button id="resetBtn">Reset</button>
+      </div>
+    </div>
+
+    <div class="canvas-wrap">
+      <canvas id="cvs"></canvas>
+      <div class="canvas-hint" id="hint">Click any node to start the fire there</div>
+    </div>
+
+    <div class="legend">
+      <span class="leg-item"><span class="dot normal"></span>Normal</span>
+      <span class="leg-item"><span class="dot fire"></span>On fire</span>
+      <span class="leg-item"><span class="dot protected"></span>Protected</span>
+      <span class="leg-item"><span class="dot burned"></span>Burned</span>
+      <span class="leg-item"><span class="dot origin"></span>Origin</span>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-card"><div class="stat-label">Total nodes</div><div class="stat-val" id="sTotal">—</div></div>
+      <div class="stat-card"><div class="stat-label">Saved</div><div class="stat-val saved" id="sSaved">—</div></div>
+      <div class="stat-card"><div class="stat-label">Burned</div><div class="stat-val burned" id="sBurned">—</div></div>
+      <div class="stat-card"><div class="stat-label">Surviving rate</div><div class="stat-val" id="sRate">—</div></div>
+      <div class="stat-card"><div class="stat-label">Round</div><div class="stat-val" id="sRound">—</div></div>
+    </div>
+
+    <div class="log-box" id="log">Select a graph type, adjust size, then click a node to ignite.</div>
+
+    <section class="info-section">
+      <div class="info-tabs">
+        <button class="tab active" data-tab="halin">Halin strategy</button>
+        <button class="tab" data-tab="outer">Outerplanar strategy</button>
+        <button class="tab" data-tab="results">Proven results</button>
+      </div>
+      <div class="tab-content" id="tab-halin">
+        <h3>Halin Graph — Optimal Strategy</h3>
+        <p>A Halin graph is a rooted plane tree with all leaves connected by an outer cycle. This hierarchical + cyclic structure enables efficient fire containment.</p>
+        <div class="case-grid">
+          <div class="case-card">
+            <div class="case-title">Case 1 — Fire at a leaf</div>
+            <p>Protect the leaf's 2 cycle-neighbours and its tree-parent (3 firefighters, round 1). Fire is confined to 1 node — all n−1 remaining nodes are saved.</p>
+          </div>
+          <div class="case-card">
+            <div class="case-title">Case 2 — Fire at internal node</div>
+            <p>Protect the node's parent and 2 children. This partitions the graph into disjoint subtrees of size ≤ 2n/3. Fire cannot cross protected boundaries.</p>
+          </div>
+        </div>
+        <p class="budget-note">Budget: <strong>3 firefighters</strong> in round 1, <strong>2 per round</strong> thereafter.</p>
+      </div>
+      <div class="tab-content hidden" id="tab-outer">
+        <h3>Outerplanar Graph — Separator Strategy</h3>
+        <p>Any outerplanar graph can be split into components of size ≤ ⌈2n/3⌉ using a 2-vertex separator {u, v}.</p>
+        <div class="case-grid">
+          <div class="case-card">
+            <div class="case-title">Case 1 — Fire in component G₁</div>
+            <p>Protect vertex v immediately. This disconnects G₂ from the fire — all of G₂ is saved.</p>
+          </div>
+          <div class="case-card">
+            <div class="case-title">Case 2 — Fire in component G₂</div>
+            <p>Protect vertex u instead. This disconnects G₁ — all of G₁ is saved.</p>
+          </div>
+        </div>
+        <p class="budget-note">Guarantee: at least <strong>1/3 of vertices saved</strong> in any outerplanar graph.</p>
+      </div>
+      <div class="tab-content hidden" id="tab-results">
+        <h3>Proven Bounds</h3>
+        <table class="results-table">
+          <thead><tr><th>Graph class</th><th>Worst-case</th><th>Asymptotic (n→∞)</th><th>Budget</th></tr></thead>
+          <tbody>
+            <tr><td>General planar</td><td>ρ ≥ 2/21 ≈ 0.095</td><td>—</td><td>3+2/round</td></tr>
+            <tr class="highlight"><td>Halin graphs <span class="badge">novel</span></td><td>ρ ≥ 1/6 ≈ 0.167</td><td>ρ ≥ 2/3 ≈ 0.667</td><td>3+2/round</td></tr>
+            <tr><td>Outerplanar graphs</td><td>ρ ≥ 1/3 ≈ 0.333</td><td>—</td><td>1+1/round</td></tr>
+          </tbody>
+        </table>
+        <p class="note">The Halin graph bound (1/6 worst-case, 2/3 asymptotic) is an original contribution of this project, improving upon the general planar bound of 2/21.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Firefighter Problem Simulator &nbsp;·&nbsp; IIT Jammu Mini Project &nbsp;·&nbsp; Group 14 (2025)</p>
+    <p>Reference: Gordinowicz, P. (2015). <em>Planar graph is on fire.</em> Theoretical Computer Science.</p>
+  </footer>
+
+  <script src="graph.js"></script>
+  <script src="simulator.js"></script>
+  <script src="ui.js"></script>
+</body>
+</html>
