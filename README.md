@@ -1,12 +1,14 @@
-# Firefighter Problem Simulator
+# Firefighter Problem Simulator(Planar Graph Fire Containment)
 
-An interactive browser-based simulator for the **Firefighter Problem** on Halin and Outerplanar graphs, with automated optimal containment strategies.
-
+This project studies the **Firefighter Problem** on planar graph subclasses, focusing on how limited resources can be used to contain a spreading process (fire) on a network.
+The work combines **graph-theoretic analysis** with an **interactive simulation** to understand containment strategies in structured graphs such as Halin and outerplanar graphs
 Built as part of the our Mini Project in sem 4 .
 
 ## Live Demo
 
 Open `index.html` directly in any browser — no server or dependencies needed.
+or 
+[▶ Open Simulator] : (https://quantum-knight07.github.io/Firefighter-probem/)
 
 ## What is the Firefighter Problem?
 
@@ -15,6 +17,14 @@ A fire breaks out at a vertex of a graph. Each round:
 2. Fire spreads to all unprotected neighbours of burning vertices
 
 The goal is to maximize the fraction of vertices saved (*surviving rate*).
+
+## Real-World Applications
+
+The Firefighter Problem models any scenario where a spreading process 
+must be contained with limited intervention resources:
+- **Cybersecurity** — isolating compromised nodes in a network to prevent malware propagation
+- **Infrastructure protection** — protecting critical nodes in power grids or transport networks from cascading failures
+- **Social network influence** — limiting spread of misinformation by targeting key nodes
 
 ## Proven Results (this project)
 
@@ -35,6 +45,24 @@ The **Halin graph bound is an original contribution** of this project, improving
 ### Outerplanar Graphs
 - Uses a 2-vertex separator {u, v} to disconnect the graph into components
 - Protecting the separator guarantees at least 1/3 of vertices are saved
+
+## Concepts Used
+- Graph Theory  
+- Planar Graphs  
+- Separator Theorems (conceptual application)  
+- Combinatorics  
+- Algorithm Design  
+---
+
+## Key Contributions
+This project was developed as a **group effort (4 members)** as part of a course mini-project.
+- Studied the Firefighter Problem on **Halin graphs** and **outerplanar graphs**
+- Applied **separator-based strategies** and structural graph properties to restrict fire spread
+- Derived improved bounds for Halin graphs:
+  - Worst-case surviving rate ≥ **1/6**
+  - Asymptotic surviving rate ≥ **2/3**
+- Independently verified known results for outerplanar graphs using **2-vertex separator strategies**
+- Built an interactive simulator to visualize fire propagation and containment strategies
 
 ## How to Use
 
